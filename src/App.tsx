@@ -1,35 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1 className="mt-10 text-center text-4xl">
+        Welcome to the Frontend Quiz!
+      </h1>
+
+      {/*
+      <!-- Quiz menu start -->
+
+      Welcome to the Frontend Quiz!
+      Pick a subject to get started.
+
+      HTML
+      CSS
+      JavaScript
+      Accessibility
+
+      <!-- Quiz menu end -->
+
+      <!-- Quiz question start -->
+
+      Question <!-- number --> of 10
+
+      A
+      B
+      C
+      D
+
+      Submit answer
+
+      <!-- Quiz question end -->
+
+      <!-- Quiz completed start -->
+
+      Quiz completed
+      You scored...
+
+      <!-- score --> out of 10
+
+      <!-- Quiz completed end -->
+
+      */}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
