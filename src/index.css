@@ -33,5 +33,12 @@
 
   --default-font-family: "Rubik Medium";
 
+  --text-display: 9rem;
+  --text-heading-lg: 4rem;
+  --text-heading-md: 2.25rem;
+  --text-heading-sm: 1.75rem;
+  --text-body-md: 1.75rem;
+  --text-body-sm: 1.25rem;
+
   --spacing-29: 72.5rem;
 }

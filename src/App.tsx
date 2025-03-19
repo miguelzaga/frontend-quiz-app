@@ -25,23 +25,30 @@ function App() {
         <div className="mx-auto max-w-29">
           <header className="px-6 py-4">
             <div>{/* Question title */}</div>
-            <div className="ml-auto flex w-fit">
-              <img src={iconMoonDark} alt="" />
-              <input type="checkbox" />
-              <img src={iconSunDark} alt="" />
+            <div className="ml-auto flex w-fit items-center gap-x-2">
+              <img className="size-4 md:size-6" src={iconMoonDark} alt="" />
+              <input
+                className="size-5 cursor-pointer md:size-7"
+                type="checkbox"
+              />
+              <img className="size-4 md:size-6" src={iconSunDark} alt="" />
             </div>
           </header>
           <main className="grid gap-y-10 px-6 py-8 text-blue-900">
             <div>
-              <h1 className="text-4xl">
+              <h1 className="md:text-heading-lg text-[2.5rem]/none">
                 Welcome to the{" "}
                 <span className="font-medium">Frontend Quiz!</span>
               </h1>
-              <p className="mt-4 italic">Pick a subject to get started.</p>
+              <p className="md:text-body-sm mt-4 text-sm/normal italic">
+                Pick a subject to get started.
+              </p>
             </div>
 
             <ul className="grid gap-y-3 font-medium">
-              {Object.entries(liTopics).map(liElement)}
+              {Object.entries(liTopics).map(([txt, img], i) => (
+                <ListElement text={txt} image={img} index={i} />
+              ))}
             </ul>
           </main>
         </div>
@@ -50,19 +57,24 @@ function App() {
   );
 }
 
-function liElement(keyPair, index) {
-  const [text, img] = keyPair;
+function ListElement({
+  text,
+  image,
+  index
+}: {
+  text: string;
+  image: string;
+  index: number;
+}) {
   return (
-    <li
-      className="flex items-center gap-x-4 rounded-xl bg-white p-3"
-      key={`liElement-${index}`}
-    >
-      <div>
-        {" "}
-        {/* TODO: add background that changes according to the input */}
-        <img src={img} alt="" />
-      </div>
-      <p>{text}</p>
+    <li key={`liElement-${index}`}>
+      <button className="flex w-full cursor-pointer items-center gap-x-4 rounded-xl bg-white p-3">
+        <div>
+          {/* TODO: add background that changes according to the input */}
+          <img src={image} alt="" />
+        </div>
+        <p className="md:text-heading-sm text-lg/none">{text}</p>
+      </button>
     </li>
   );
 }
