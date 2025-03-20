@@ -41,4 +41,6 @@
   --text-body-sm: 1.25rem;
 
   --spacing-29: 72.5rem;
+
+  --drop-shadow-list: 0 16px 40px rgba(143, 160, 193, 0.14);
 }

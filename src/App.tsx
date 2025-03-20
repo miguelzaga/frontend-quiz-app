@@ -6,12 +6,16 @@ import iconCss from "./assets/images/icon-css.svg";
 import iconJs from "./assets/images/icon-js.svg";
 import iconAccessibility from "./assets/images/icon-accessibility.svg";
 
+interface StringDictionary {
+  [key: string]: string;
+}
+
 /*
 TODO: I need to change the liTopics for the data itself. I think is better if
 I do that in another file. And depending on the data needed, I can transform
 it and then render it in this component
 */
-const liTopics = {
+const liTopics: StringDictionary = {
   HTML: iconHtml,
   CSS: iconCss,
   JavaScript: iconJs,
@@ -22,6 +26,8 @@ function App() {
   return (
     <>
       <div className="min-h-screen bg-gray-100 font-thin">
+        {/* TODO: 
+            add background patterns */}
         <div className="mx-auto max-w-29">
           <header className="px-6 py-4">
             <div>{/* Question title */}</div>
@@ -46,6 +52,9 @@ function App() {
             </div>
 
             <ul className="grid gap-y-3 font-medium">
+              {/* TODO:
+                  This map function should be in another component,
+                  The ListElement component should not have index as a parameter */}
               {Object.entries(liTopics).map(([txt, img], i) => (
                 <ListElement text={txt} image={img} index={i} />
               ))}
@@ -57,6 +66,10 @@ function App() {
   );
 }
 
+{
+  /* TODO: 
+    Move this component to a new file and make it more reusable */
+}
 function ListElement({
   text,
   image,
@@ -66,27 +79,28 @@ function ListElement({
   image: string;
   index: number;
 }) {
-  const colors = [
-    "bg-[#FFF1E9]",
-    "bg-[#E0FDEF]",
-    "bg-[#EBF0FF]",
-    "bg-[#F6E7FF]"
-  ];
-  {
-    /* TODO: Maybe change colors to an object and pass a prop to access that object
-    like sending the key purple, and have the gray color as the default prop */
-  }
-  let color = "bg-gray-100";
-  if (index < colors.length) {
-    color = colors[index];
+  const colors: StringDictionary = {
+    HTML: "bg-[#FFF1E9]",
+    CSS: "bg-[#E0FDEF]",
+    JavaScript: "bg-[#EBF0FF]",
+    Accessibility: "bg-[#F6E7FF]"
+  };
+
+  let color: string = "bg-gray-100";
+  if (colors.hasOwnProperty(text)) {
+    color = colors[text];
   }
 
   return (
     <li key={`liElement-${index}`}>
-      <button className="flex w-full cursor-pointer items-center gap-x-4 rounded-xl bg-white p-3">
+      <button className="drop-shadow-list flex w-full cursor-pointer items-center gap-x-4 rounded-xl bg-white p-3">
         <div
           className={`${color} flex size-10 items-center justify-center rounded-md md:size-16 md:rounded-lg`}
         >
+          {/* TODO:
+              Change this image and make it so that the element is a child of 
+              the component so that it is reusable for the questions. For the
+              questions we can put the A, B, C, D as elements. */}
           <img src={image} alt="" />
         </div>
         <p className="md:text-heading-sm text-lg/none">{text}</p>
