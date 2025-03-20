@@ -66,11 +66,27 @@ function ListElement({
   image: string;
   index: number;
 }) {
+  const colors = [
+    "bg-[#FFF1E9]",
+    "bg-[#E0FDEF]",
+    "bg-[#EBF0FF]",
+    "bg-[#F6E7FF]"
+  ];
+  {
+    /* TODO: Maybe change colors to an object and pass a prop to access that object
+    like sending the key purple, and have the gray color as the default prop */
+  }
+  let color = "bg-gray-100";
+  if (index < colors.length) {
+    color = colors[index];
+  }
+
   return (
     <li key={`liElement-${index}`}>
       <button className="flex w-full cursor-pointer items-center gap-x-4 rounded-xl bg-white p-3">
-        <div>
-          {/* TODO: add background that changes according to the input */}
+        <div
+          className={`${color} flex size-10 items-center justify-center rounded-md md:size-16 md:rounded-lg`}
+        >
           <img src={image} alt="" />
         </div>
         <p className="md:text-heading-sm text-lg/none">{text}</p>
