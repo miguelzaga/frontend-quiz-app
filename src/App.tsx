@@ -23,10 +23,10 @@ interface Quiz {
 function App() {
   return (
     <>
-      <div className="min-h-screen bg-gray-100 font-thin">
+      <div className="min-h-screen bg-gray-100 font-thin md:pb-14">
         {/* TODO: add background patterns */}
-        <div className="mx-auto max-w-29">
-          <header className="px-6 py-4">
+        <div className="mx-auto box-content max-w-29 px-6 md:px-16">
+          <header className="py-4 md:pt-10 md:pb-0">
             <div>{/* Question title */}</div>
             <div className="ml-auto flex w-fit items-center gap-x-2">
               <img
@@ -45,7 +45,7 @@ function App() {
               />
             </div>
           </header>
-          <main className="grid gap-y-10 px-6 py-8 text-blue-900">
+          <main className="mt-8 grid gap-y-10 text-blue-900 md:gap-y-16">
             <div>
               <h1 className="md:text-heading-lg text-[2.5rem]/none">
                 Welcome to the{" "}
@@ -56,11 +56,8 @@ function App() {
               </p>
             </div>
 
-            <ul className="grid gap-y-3 font-medium">
+            <ul className="grid gap-y-3 font-medium md:gap-y-6">
               {/* TODO: This map function should be in another component, The ListElement component should not have index as a parameter */}
-              {/*Object.entries(topics).map(([txt, img], i) => (
-                <ListElement text={txt} image={img} index={i} />
-              ))*/}
               {data.quizzes.map(({ title, icon }: Quiz, i) => (
                 <ListElement
                   key={title + i}
