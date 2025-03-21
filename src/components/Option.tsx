@@ -1,24 +1,11 @@
-import iconModules from "../iconModules.tsx";
-
 export default function Option({
   text,
-  image
+  children
 }: {
   text: string;
-  image: string;
-  index: number;
+  children?: any;
 }) {
-  const colors: { [key: string]: string } = {
-    HTML: "bg-[#FFF1E9]",
-    CSS: "bg-[#E0FDEF]",
-    JavaScript: "bg-[#EBF0FF]",
-    Accessibility: "bg-[#F6E7FF]"
-  };
-
-  let color: string = "bg-gray-100";
-  if (colors.hasOwnProperty(text)) {
-    color = colors[text];
-  }
+  let color = getColor(text);
 
   return (
     <li>
@@ -27,10 +14,25 @@ export default function Option({
           className={`${color} flex size-10 items-center justify-center rounded-md p-1.5 md:size-14 md:rounded-lg`}
         >
           {/* TODO: Change this image and make it so that the element is a child of the component so that it is reusable for the questions. For the questions we can put the A, B, C, D as elements. */}
-          <img src={iconModules[image].default} alt="" />
+          {children}
         </div>
         <p className="md:text-heading-sm text-lg/none">{text}</p>
       </button>
     </li>
   );
+}
+
+function getColor(title: string) {
+  const colors: { [key: string]: string } = {
+    HTML: "bg-[#FFF1E9]",
+    CSS: "bg-[#E0FDEF]",
+    JavaScript: "bg-[#EBF0FF]",
+    Accessibility: "bg-[#F6E7FF]"
+  };
+
+  let color: string = "bg-gray-100";
+  if (colors.hasOwnProperty(title)) {
+    color = colors[title];
+  }
+  return color;
 }

@@ -1,19 +1,6 @@
 import "./App.css";
-import data from "./data.json";
-import Option from "./components/Option.tsx";
 import Header from "./components/Header.tsx";
-
-interface Question {
-  question: string;
-  options: Array<string>;
-  answer: string;
-}
-
-interface Quiz {
-  title: string;
-  icon: string;
-  questions: Array<Question>;
-}
+import TopicOptions from "./components/TopicOptions.tsx";
 
 function App() {
   return (
@@ -32,13 +19,7 @@ function App() {
                 Pick a subject to get started.
               </p>
             </div>
-
-            <ul className="grid gap-y-3 font-medium md:gap-y-6">
-              {/* TODO: This map function should be in another component, The ListElement component should not have index as a parameter */}
-              {data.quizzes.map(({ title, icon }: Quiz, i) => (
-                <Option key={title + i} text={title} image={icon} index={i} />
-              ))}
-            </ul>
+            <TopicOptions />
           </main>
         </div>
       </div>
