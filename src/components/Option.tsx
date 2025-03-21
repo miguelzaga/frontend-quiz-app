@@ -22,9 +22,9 @@ export default function Option({
 
   return (
     <li>
-      <button className="drop-shadow-list flex w-full cursor-pointer items-center gap-x-4 rounded-xl bg-white p-3">
+      <button className="drop-shadow-list flex w-full cursor-pointer items-center gap-x-4 rounded-xl bg-white p-3 md:gap-x-8 md:rounded-3xl lg:p-5">
         <div
-          className={`${color} flex size-10 items-center justify-center rounded-md p-1.5 md:size-16 md:rounded-lg`}
+          className={`${color} flex size-10 items-center justify-center rounded-md p-1.5 md:size-14 md:rounded-lg`}
         >
           {/* TODO: Change this image and make it so that the element is a child of the component so that it is reusable for the questions. For the questions we can put the A, B, C, D as elements. */}
           <img src={iconModules[image].default} alt="" />
