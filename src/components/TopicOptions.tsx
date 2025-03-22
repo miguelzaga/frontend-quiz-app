@@ -11,11 +11,9 @@ export default function TopicOptions() {
     <ul className="grid gap-y-3 font-medium md:gap-y-6">
       {data.quizzes.map(({ title, icon }, index) => {
         return (
-          <Option
-            key={index + title}
-            text={title}
-            children={<img src={iconModules[icon].default} alt="" />}
-          />
+          <Option key={index + title} text={title}>
+            <img src={iconModules[icon].default} alt={`Icon of ${title}`} />
+          </Option>
         );
       })}
     </ul>

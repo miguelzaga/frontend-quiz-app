@@ -5,6 +5,7 @@ import TopicOptions from "./components/TopicOptions.tsx";
 function App() {
   return (
     <>
+      {/* TODO: style the dark mode */}
       <div className="min-h-screen bg-gray-100 font-thin md:pb-14">
         {/* TODO: add background patterns */}
         <div className="mx-auto box-content max-w-29 px-6 md:px-16">
