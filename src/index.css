@@ -40,7 +40,8 @@
   --text-body-md: 1.75rem;
   --text-body-sm: 1.25rem;
 
-  --spacing-29: 72.5rem;
+  --spacing-70: calc(var(--spacing) * 70);
+  --spacing-290: calc(var(--spacing) * 290);
 
   --drop-shadow-list: 0 16px 40px rgba(143, 160, 193, 0.14);
 }
