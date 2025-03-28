@@ -1,10 +1,26 @@
-export default function Option({
-  text,
-  children
-}: {
-  text: string;
-  children?: any;
-}) {
+export default function Options({ titles, icons }) {
+  return (
+    <ul className="grid gap-y-3 font-medium md:gap-y-6">
+      {titles.map((title, index) => {
+        return (
+          <Option key={index + title} text={title}>
+            <Image index={index} />
+          </Option>
+        );
+      })}
+    </ul>
+  );
+
+  function Image({ index }) {
+    const alphabet = "ABCDEFG";
+    if (icons === null) {
+      return <p>{alphabet[index]}</p>;
+    }
+    return <img src={icons[index]} alt={`Icon of ${titles[index]}`} />;
+  }
+}
+
+function Option({ text, children }: { text: string; children?: any }) {
   let color = getColor(text);
 
   return (
@@ -13,7 +29,6 @@ export default function Option({
         <div
           className={`${color} flex size-10 items-center justify-center rounded-md p-1.5 md:size-14 md:rounded-lg`}
         >
-          {/* TODO: Change this image and make it so that the element is a child of the component so that it is reusable for the questions. For the questions we can put the A, B, C, D as elements. */}
           {children}
         </div>
         <p className="md:text-heading-sm text-lg/none">{text}</p>
