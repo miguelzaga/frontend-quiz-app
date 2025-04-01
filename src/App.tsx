@@ -11,8 +11,18 @@ import { useState } from "react";
 const titles = data.quizzes.map((quiz) => quiz.title);
 const icons = data.quizzes.map((quiz) => iconModules[quiz.icon].default);
 
+const question = {
+  question:
+    "Which of these color contrast ratios defines the minimum WCAG 2.1 Level AA requirement for normal text?",
+  options: ["3:1", "4.5:1", "7:1", "2:1"],
+  answer: "4.5:1"
+};
+
+const questionTitle = question.question;
+const questionOptions = question.options;
+
 function App() {
-  const [isMenu, setIsMenu] = useState(false);
+  const [isMenu] = useState(false);
 
   return (
     <>
@@ -20,45 +30,47 @@ function App() {
       <Layout>
         <Header />
         <main className="mt-8 grid gap-y-10 text-blue-900 min-[1064px]:grid-cols-2 md:gap-y-16 lg:mt-20 lg:gap-x-8">
-          <Main isMenu={isMenu} />
+          {isMenu ? (
+            <>
+              <div>
+                <h1 className="md:text-heading-lg text-[2.5rem]/none">
+                  Welcome to the{" "}
+                  <span className="mt-2 block font-medium">Frontend Quiz!</span>
+                </h1>
+                <p className="md:text-body-sm mt-4 text-sm/normal italic lg:mt-12">
+                  Pick a subject to get started.
+                </p>
+              </div>
+              <Options titles={titles} icons={icons} />
+            </>
+          ) : (
+            <>
+              <div className="flex flex-col justify-between gap-6 md:gap-10">
+                <div>
+                  <p className="md:text-body-sm text-sm/normal italic">
+                    Question 6 of 10
+                    {/* TODO: make dynamic */}
+                  </p>
+                  <p className="text-body-sm/[1.2] mt-3 font-medium md:mt-7">
+                    {questionTitle}
+                  </p>
+                </div>
+                <div className="rounded-full bg-white p-1">
+                  <div className="h-2 w-6/10 rounded-full bg-purple-500">
+                    {/* TODO: Make mapping for dynamic bar based on the number of questions answered */}
+                  </div>
+                </div>
+              </div>
+              <Options titles={questionOptions} icons={null} />
+              {/* TODO: Adjust grid position for the button */}
+              <button className="md:text-heading-sm rounded-xl bg-purple-500 p-3 text-lg font-medium text-white md:rounded-3xl md:p-8">
+                Submit Answer
+              </button>
+            </>
+          )}
         </main>
       </Layout>
     </>
   );
-}
-
-function Main({ isMenu }) {
-  if (isMenu === true) {
-    return (
-      <>
-        <div>
-          <h1 className="md:text-heading-lg text-[2.5rem]/none">
-            Welcome to the{" "}
-            <span className="mt-2 block font-medium">Frontend Quiz!</span>
-          </h1>
-          <p className="md:text-body-sm mt-4 text-sm/normal italic lg:mt-12">
-            Pick a subject to get started.
-          </p>
-        </div>
-        <Options titles={titles} icons={icons} />
-      </>
-    );
-  } else {
-    return (
-      <>
-        <div>
-          <p className="md:text-body-sm mt-4 text-sm/normal italic lg:mt-12">
-            Pick a subject to get started.
-          </p>
-          <p>
-            Which of these color contrast ratios defines the minimum WCAG 2.1
-            Level AA requirement for normal text?
-          </p>
-          <div>{/* TODO: Progress bar */}</div>
-        </div>
-        <Options titles={titles} icons={null} />
-      </>
-    );
-  }
 }
 export default App;
