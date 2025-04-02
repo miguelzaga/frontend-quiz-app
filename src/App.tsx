@@ -45,27 +45,27 @@ function App() {
             </>
           ) : (
             <>
-              <div className="flex flex-col justify-between gap-6 md:gap-10">
+              <div className="flex flex-col justify-between gap-6 md:gap-10 xl:max-w-[465px]">
                 <div>
                   <p className="md:text-body-sm text-sm/normal italic">
                     Question 6 of 10
                     {/* TODO: make dynamic */}
                   </p>
-                  <p className="text-body-sm/[1.2] mt-3 font-medium md:mt-7">
+                  <p className="text-body-sm/[1.2] md:text-heading-md mt-3 font-medium md:mt-7">
                     {questionTitle}
                   </p>
                 </div>
-                <div className="rounded-full bg-white p-1">
+                <div className="rounded-full bg-white p-1 lg:mb-28">
                   <div className="h-2 w-6/10 rounded-full bg-purple-500">
                     {/* TODO: Make mapping for dynamic bar based on the number of questions answered */}
                   </div>
                 </div>
               </div>
-              <Options titles={questionOptions} icons={null} />
-              {/* TODO: Adjust grid position for the button */}
-              <button className="md:text-heading-sm rounded-xl bg-purple-500 p-3 text-lg font-medium text-white md:rounded-3xl md:p-8">
-                Submit Answer
-              </button>
+              <Options titles={questionOptions} icons={null}>
+                <button className="md:text-heading-sm rounded-xl bg-purple-500 p-3 text-lg font-medium text-white md:mt-2 md:rounded-3xl md:p-8">
+                  Submit Answer
+                </button>
+              </Options>
             </>
           )}
         </main>

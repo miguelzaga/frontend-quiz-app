@@ -1,4 +1,4 @@
-export default function Options({ titles, icons }) {
+export default function Options({ titles, icons, children }) {
   return (
     <ul className="grid gap-y-3 font-medium md:gap-y-6">
       {titles.map((title, index) => {
@@ -8,6 +8,7 @@ export default function Options({ titles, icons }) {
           </Option>
         );
       })}
+      {children}
     </ul>
   );
 

@@ -1,13 +1,23 @@
 #!/usr/bin/env bash
 
+# Rename first tmux window and create additional windows
 tmux rename-window nvim
-google-chrome http://localhost:5173/
-google-chrome https://www.figma.com/design/gckxIZfSpJbM150zwulzot/frontend-quiz-app
 tmux new-window -n terminal
 tmux new-window -n README 
 tmux new-window -n npm-run
-tmux send-keys -t npm "npm run dev" 
+
+# Send commands to specific tmux windows
+tmux send-keys -t npm-run "npm run dev" 
 tmux send-keys -t README "nvim README-template.md" 
+
+# Launch Chrome and handle workspace movement
+google-chrome --new-window http://localhost:5173/
+sleep 0.5
+i3 "focus child, move container to workspace number 7"
+google-chrome --new-window https://www.figma.com/design/gckxIZfSpJbM150zwulzot/frontend-quiz-app
+sleep 0.5
+i3 "focus child, move container to workspace number 8"
+
+# Switch to first workspace and select nvim window
 tmux select-window -t nvim
 nvim .
-
