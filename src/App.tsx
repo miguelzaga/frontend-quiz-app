@@ -61,7 +61,7 @@ function App() {
                 </div>
               </div>
               <Options titles={questionOptions} icons={null}>
-                <button className="md:text-heading-sm rounded-xl bg-purple-500 p-3 text-lg font-medium text-white md:mt-2 md:rounded-3xl md:p-8 hover:opacity-50 cursor-pointer">
+                <button className="md:text-heading-sm cursor-pointer rounded-xl bg-purple-500 p-3 text-lg font-medium text-white hover:opacity-50 md:mt-2 md:rounded-3xl md:p-8">
                   Submit Answer
                 </button>
               </Options>
