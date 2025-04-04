@@ -1,4 +1,3 @@
-import "./App.css";
 import Header from "./components/Header.tsx";
 import Options from "./components/Options.tsx";
 import Layout from "./components/Layout.tsx";
@@ -41,7 +40,7 @@ function App() {
                   Pick a subject to get started.
                 </p>
               </div>
-              <Options titles={titles} icons={icons} />
+              <Options titles={titles} icons={icons} children={null} />
             </>
           ) : (
             <>
@@ -62,7 +61,7 @@ function App() {
                 </div>
               </div>
               <Options titles={questionOptions} icons={null}>
-                <button className="md:text-heading-sm rounded-xl bg-purple-500 p-3 text-lg font-medium text-white md:mt-2 md:rounded-3xl md:p-8">
+                <button className="md:text-heading-sm rounded-xl bg-purple-500 p-3 text-lg font-medium text-white md:mt-2 md:rounded-3xl md:p-8 hover:opacity-50 cursor-pointer">
                   Submit Answer
                 </button>
               </Options>
