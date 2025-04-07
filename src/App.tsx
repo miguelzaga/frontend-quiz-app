@@ -21,15 +21,17 @@ const questionTitle = question.question;
 const questionOptions = question.options;
 
 function App() {
-  const [isMenu] = useState(false);
+  const [page, setPage] = useState<string>("menu");
+  const [topic, setTopic] = useState<string>("");
+  const [questionNumber, setQuestionNumber] = useState<number>(1);
 
   return (
     <>
       {/* TODO: style the dark mode */}
       <Layout>
-        <Header />
+        <Header title={topic} />
         <main className="mt-8 grid gap-y-10 text-blue-900 min-[1064px]:grid-cols-2 md:gap-y-16 lg:mt-20 lg:gap-x-8">
-          {isMenu ? (
+          {page === "menu" ? (
             <>
               <div>
                 <h1 className="md:text-heading-lg text-[2.5rem]/none">
@@ -40,14 +42,22 @@ function App() {
                   Pick a subject to get started.
                 </p>
               </div>
-              <Options titles={titles} icons={icons} children={null} />
+              <Options
+                titles={titles}
+                icons={icons}
+                children={null}
+                onClick={(topic: string) => {
+                  setTopic(topic);
+                  setPage("questions");
+                }}
+              />
             </>
           ) : (
             <>
               <div className="flex flex-col justify-between gap-6 md:gap-10 xl:max-w-[465px]">
                 <div>
                   <p className="md:text-body-sm text-sm/normal italic">
-                    Question 6 of 10
+                    Question {questionNumber} of 10
                     {/* TODO: make dynamic */}
                   </p>
                   <p className="text-body-sm/[1.2] md:text-heading-md mt-3 font-medium md:mt-7">
@@ -61,7 +71,14 @@ function App() {
                 </div>
               </div>
               <Options titles={questionOptions} icons={null}>
-                <button className="md:text-heading-sm cursor-pointer rounded-xl bg-purple-500 p-3 text-lg font-medium text-white hover:opacity-50 md:mt-2 md:rounded-3xl md:p-8">
+                <button
+                  onClick={() => {
+                    if (questionNumber < 10) {
+                      setQuestionNumber(questionNumber + 1);
+                    }
+                  }}
+                  className="md:text-heading-sm cursor-pointer rounded-xl bg-purple-500 p-3 text-lg font-medium text-white hover:opacity-50 md:mt-2 md:rounded-3xl md:p-8"
+                >
                   Submit Answer
                 </button>
               </Options>
@@ -72,4 +89,5 @@ function App() {
     </>
   );
 }
+
 export default App;

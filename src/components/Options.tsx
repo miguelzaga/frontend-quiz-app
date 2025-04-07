@@ -4,21 +4,18 @@ import React, { useState } from "react";
 export default function Options({
   titles,
   icons,
-  children
+  children,
+  onClick
 }: {
   titles: string[];
   icons: string[] | null;
   children: React.ReactNode;
+  onClick: Function;
 }) {
   type ButtonState = "unselected" | "selected" | "correct" | "wrong";
-
-  // const [btnStates, setBtnStates] = useState<ButtonState[]>(titles.map(() => 'unselected'));
-  const [btnStates, setBtnStates] = useState<ButtonState[]>([
-    "correct",
-    "wrong",
-    "selected",
-    "unselected"
-  ]);
+  const [btnStates, setBtnStates] = useState<ButtonState[]>(
+    titles.map(() => "unselected")
+  );
 
   return (
     <ul className="grid gap-y-3 font-medium md:gap-y-6">
@@ -28,7 +25,13 @@ export default function Options({
             key={index + title}
             text={title}
             state={btnStates[index]}
-            handleClick={() => clickButton(index)}
+            handleClick={() => {
+              if (onClick) {
+                onClick(title);
+              } else {
+                clickButton(index);
+              }
+            }}
           >
             <Image index={index} />
           </Option>
