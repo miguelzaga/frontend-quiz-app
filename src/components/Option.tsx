@@ -1,24 +1,24 @@
+type ButtonState = "unselected" | "selected" | "correct" | "wrong";
+
 export default function Option({
   text,
-  selected,
-  setSelected,
+  state,
+  handleClick,
   children
 }: {
   text: string;
-  selected: boolean;
-  setSelected: Function;
+  state: ButtonState;
+  handleClick: Function;
   children?: any;
 }) {
-  let color = getColor(text);
-
   return (
     <li>
       <button
-        onClick={() => setSelected()}
-        className={`drop-shadow-list group flex h-16 w-full cursor-pointer items-center gap-x-4 rounded-xl border-[3px] bg-white p-3 md:h-20 md:gap-x-8 md:rounded-3xl lg:h-[92px] ${selected ? "border-purple-500" : "border-transparent"}`}
+        onClick={() => handleClick()}
+        className={`drop-shadow-list group flex h-16 w-full cursor-pointer items-center gap-x-4 rounded-xl border-[3px] bg-white p-3 md:h-20 md:gap-x-8 md:rounded-3xl lg:h-[92px] ${getButtonClass(state)}`}
       >
         <div
-          className={`${color} flex size-10 items-center justify-center rounded-md p-1.5 md:size-14 md:rounded-lg ${selected ? "bg-purple-500 text-white" : "group-hover:bg-purple-200 group-hover:text-purple-500"}`}
+          className={`${getCustomColor(text)} ${getDivClass(state)} flex size-10 items-center justify-center rounded-md p-1.5 md:size-14 md:rounded-lg`}
         >
           {children}
         </div>
@@ -28,17 +28,43 @@ export default function Option({
   );
 }
 
-function getColor(title: string) {
-  const colors: { [key: string]: string } = {
-    HTML: "bg-[#FFF1E9]",
-    CSS: "bg-[#E0FDEF]",
-    JavaScript: "bg-[#EBF0FF]",
-    Accessibility: "bg-[#F6E7FF]"
-  };
-
-  let color: string = "bg-gray-100";
-  if (colors.hasOwnProperty(title)) {
-    color = colors[title];
+function getButtonClass(state: ButtonState) {
+  switch (state) {
+    case "selected":
+      return "border-purple-500";
+    case "wrong":
+      return "border-red-500";
+    case "correct":
+      return "border-green-500";
+    default:
+      return "border-transparent ";
   }
-  return color;
+}
+
+function getDivClass(state: ButtonState) {
+  switch (state) {
+    case "selected":
+      return "bg-purple-500 text-white";
+    case "wrong":
+      return "bg-red-500 text-white";
+    case "correct":
+      return "bg-green-500 text-white";
+    default:
+      return "border-transparent group-hover:bg-purple-200 group-hover:text-purple-500";
+  }
+}
+
+function getCustomColor(title: string) {
+  switch (title) {
+    case "HTML":
+      return "bg-[#FFF1E9]";
+    case "CSS":
+      return "bg-[#E0FDEF]";
+    case "JavaScript":
+      return "bg-[#EBF0FF]";
+    case "Accessibility":
+      return "bg-[#F6E7FF]";
+    default:
+      return "bg-gray-100";
+  }
 }

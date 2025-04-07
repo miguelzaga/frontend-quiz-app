@@ -11,7 +11,7 @@ tmux send-keys -t npm-run "npm run dev"
 tmux send-keys -t README "nvim README-template.md" 
 
 # Launch Chrome and handle workspace movement
-google-chrome --new-window http://localhost:5173/
+google-chrome --new-window --incognito http://localhost:5173/
 sleep 0.5
 i3 "focus child, move container to workspace number 7"
 google-chrome --new-window https://www.figma.com/design/gckxIZfSpJbM150zwulzot/frontend-quiz-app

@@ -10,12 +10,15 @@ export default function Options({
   icons: string[] | null;
   children: React.ReactNode;
 }) {
-  const unselectedState = titles.map((_) => false);
-  const [selected, setSelected] = useState(unselectedState);
+  type ButtonState = "unselected" | "selected" | "correct" | "wrong";
 
-  function getSelected(index: number) {
-    return unselectedState.map((_, i) => i === index);
-  }
+  // const [btnStates, setBtnStates] = useState<ButtonState[]>(titles.map(() => 'unselected'));
+  const [btnStates, setBtnStates] = useState<ButtonState[]>([
+    "correct",
+    "wrong",
+    "selected",
+    "unselected"
+  ]);
 
   return (
     <ul className="grid gap-y-3 font-medium md:gap-y-6">
@@ -24,8 +27,8 @@ export default function Options({
           <Option
             key={index + title}
             text={title}
-            selected={selected[index]}
-            setSelected={() => setSelected(getSelected(index))}
+            state={btnStates[index]}
+            handleClick={() => clickButton(index)}
           >
             <Image index={index} />
           </Option>
@@ -34,6 +37,12 @@ export default function Options({
       {children}
     </ul>
   );
+
+  function clickButton(i: number) {
+    const states = btnStates.map(() => "unselected");
+    states[i] = "selected";
+    setBtnStates(states);
+  }
 
   function Image({ index }: { index: number }) {
     const alphabet = "ABCDEFG";
