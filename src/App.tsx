@@ -1,6 +1,7 @@
 import Header from "./components/Header.tsx";
-import Options from "./components/Options.tsx";
 import Layout from "./components/Layout.tsx";
+import Menu from "./components/Menu.tsx";
+import Question from "./components/Question.tsx";
 
 import iconModules from "./iconModules.tsx";
 import data from "./data.json";
@@ -16,90 +17,32 @@ function App() {
   const [topic, setTopic] = useState<number>(NaN);
   const [questionNumber, setQuestionNumber] = useState<number>(0);
 
-  let questions;
-  let question;
-  let questionTitle;
-  let questionOptions;
-
-  if (!isNaN(topic)) {
-    questions = quizzes[topic].questions;
-    question = questions[questionNumber];
-    questionTitle = question.question;
-    questionOptions = question.options;
-  }
-
-  const barWidth = [
-    "w-0/10",
-    "w-1/10",
-    "w-2/10",
-    "w-3/10",
-    "w-4/10",
-    "w-5/10",
-    "w-6/10",
-    "w-7/10",
-    "w-8/10",
-    "w-9/10",
-    "w-full"
-  ];
-
   return (
     <>
       {/* TODO: style the dark mode */}
       <Layout>
         <Header title={titles[topic]} />
         <main className="mt-8 grid gap-y-10 text-blue-900 min-[1064px]:grid-cols-2 md:gap-y-16 lg:mt-20 lg:gap-x-8">
-          {page === "menu" ? (
-            <>
-              <div>
-                <h1 className="md:text-heading-lg text-[2.5rem]/none">
-                  Welcome to the{" "}
-                  <span className="mt-2 block font-medium">Frontend Quiz!</span>
-                </h1>
-                <p className="md:text-body-sm mt-4 text-sm/normal italic lg:mt-12">
-                  Pick a subject to get started.
-                </p>
-              </div>
-              <Options
-                titles={titles}
-                icons={icons}
-                children={null}
-                onClick={(topic: number) => {
-                  setTopic(topic);
-                  setPage("questions");
-                }}
-              />
-            </>
-          ) : (
-            <>
-              <div className="flex flex-col justify-between gap-6 md:gap-10 xl:max-w-[465px]">
-                <div>
-                  <p className="md:text-body-sm text-sm/normal italic">
-                    Question {questionNumber + 1} of 10
-                  </p>
-                  <p className="text-body-sm/[1.2] md:text-heading-md mt-3 font-medium md:mt-7">
-                    {questionTitle}
-                  </p>
-                </div>
-                <div className="rounded-full bg-white p-1 lg:mb-28">
-                  <div
-                    className={`${barWidth[questionNumber]} h-2 rounded-full bg-purple-500`}
-                  ></div>
-                </div>
-              </div>
-              <Options titles={questionOptions} icons={null}>
-                <button
-                  onClick={() => {
-                    if (questionNumber < questions.length - 1) {
-                      setQuestionNumber(questionNumber + 1);
-                    }
-                  }}
-                  className="md:text-heading-sm cursor-pointer rounded-xl bg-purple-500 p-3 text-lg font-medium text-white hover:opacity-50 md:mt-2 md:rounded-3xl md:p-8"
-                >
-                  Submit Answer
-                </button>
-              </Options>
-            </>
+          {page === "menu" && (
+            <Menu
+              titles={titles}
+              icons={icons}
+              onClick={(topic: number) => {
+                setTopic(topic);
+                setPage("question");
+              }}
+            />
           )}
+          {page === "question" && (
+            <Question
+              setQuestionNumber={setQuestionNumber}
+              quizzes={quizzes}
+              topic={topic}
+              questionNumber={questionNumber}
+              setPage={setPage}
+            />
+          )}
+          {page === "score" && <p>Score Page</p>}
         </main>
       </Layout>
     </>
