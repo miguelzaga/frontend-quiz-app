@@ -7,29 +7,46 @@ import data from "./data.json";
 
 import { useState } from "react";
 
-const titles = data.quizzes.map((quiz) => quiz.title);
-const icons = data.quizzes.map((quiz) => iconModules[quiz.icon].default);
-
-const question = {
-  question:
-    "Which of these color contrast ratios defines the minimum WCAG 2.1 Level AA requirement for normal text?",
-  options: ["3:1", "4.5:1", "7:1", "2:1"],
-  answer: "4.5:1"
-};
-
-const questionTitle = question.question;
-const questionOptions = question.options;
+const quizzes = data.quizzes;
+const titles = quizzes.map((quiz) => quiz.title);
+const icons = quizzes.map((quiz) => iconModules[quiz.icon].default);
 
 function App() {
   const [page, setPage] = useState<string>("menu");
-  const [topic, setTopic] = useState<string>("");
-  const [questionNumber, setQuestionNumber] = useState<number>(1);
+  const [topic, setTopic] = useState<number>(NaN);
+  const [questionNumber, setQuestionNumber] = useState<number>(0);
+
+  let questions;
+  let question;
+  let questionTitle;
+  let questionOptions;
+
+  if (!isNaN(topic)) {
+    questions = quizzes[topic].questions;
+    question = questions[questionNumber];
+    questionTitle = question.question;
+    questionOptions = question.options;
+  }
+
+  const barWidth = [
+    "w-0/10",
+    "w-1/10",
+    "w-2/10",
+    "w-3/10",
+    "w-4/10",
+    "w-5/10",
+    "w-6/10",
+    "w-7/10",
+    "w-8/10",
+    "w-9/10",
+    "w-full"
+  ];
 
   return (
     <>
       {/* TODO: style the dark mode */}
       <Layout>
-        <Header title={topic} />
+        <Header title={titles[topic]} />
         <main className="mt-8 grid gap-y-10 text-blue-900 min-[1064px]:grid-cols-2 md:gap-y-16 lg:mt-20 lg:gap-x-8">
           {page === "menu" ? (
             <>
@@ -46,7 +63,7 @@ function App() {
                 titles={titles}
                 icons={icons}
                 children={null}
-                onClick={(topic: string) => {
+                onClick={(topic: number) => {
                   setTopic(topic);
                   setPage("questions");
                 }}
@@ -57,23 +74,22 @@ function App() {
               <div className="flex flex-col justify-between gap-6 md:gap-10 xl:max-w-[465px]">
                 <div>
                   <p className="md:text-body-sm text-sm/normal italic">
-                    Question {questionNumber} of 10
-                    {/* TODO: make dynamic */}
+                    Question {questionNumber + 1} of 10
                   </p>
                   <p className="text-body-sm/[1.2] md:text-heading-md mt-3 font-medium md:mt-7">
                     {questionTitle}
                   </p>
                 </div>
                 <div className="rounded-full bg-white p-1 lg:mb-28">
-                  <div className="h-2 w-6/10 rounded-full bg-purple-500">
-                    {/* TODO: Make mapping for dynamic bar based on the number of questions answered */}
-                  </div>
+                  <div
+                    className={`${barWidth[questionNumber]} h-2 rounded-full bg-purple-500`}
+                  ></div>
                 </div>
               </div>
               <Options titles={questionOptions} icons={null}>
                 <button
                   onClick={() => {
-                    if (questionNumber < 10) {
+                    if (questionNumber < questions.length - 1) {
                       setQuestionNumber(questionNumber + 1);
                     }
                   }}

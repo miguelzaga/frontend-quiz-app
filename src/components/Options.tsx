@@ -27,7 +27,7 @@ export default function Options({
             state={btnStates[index]}
             handleClick={() => {
               if (onClick) {
-                onClick(title);
+                onClick(index);
               } else {
                 clickButton(index);
               }
