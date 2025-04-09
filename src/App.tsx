@@ -3,30 +3,28 @@ import Layout from "./components/Layout.tsx";
 import Menu from "./components/Menu.tsx";
 import Question from "./components/Question.tsx";
 
-import iconModules from "./iconModules.tsx";
-import data from "./data.json";
-
 import { useState } from "react";
 
+import data from "./data.json";
 const quizzes = data.quizzes;
-const titles = quizzes.map((quiz) => quiz.title);
-const icons = quizzes.map((quiz) => iconModules[quiz.icon].default);
 
 function App() {
   const [page, setPage] = useState<string>("menu");
-  const [topic, setTopic] = useState<number>(NaN);
+  const [topicIndex, setTopic] = useState<number>(NaN);
   const [questionNumber, setQuestionNumber] = useState<number>(0);
 
+  let title = isNaN(topicIndex) ? "" : quizzes[topicIndex].title;
+  let icon = isNaN(topicIndex) ? "" : quizzes[topicIndex].icon;
   return (
     <>
       {/* TODO: style the dark mode */}
       <Layout>
-        <Header title={titles[topic]} />
+        <Header title={title} icon={icon} page={page} />
         <main className="mt-8 grid gap-y-10 text-blue-900 min-[1064px]:grid-cols-2 md:gap-y-16 lg:mt-20 lg:gap-x-8">
           {page === "menu" && (
             <Menu
-              titles={titles}
-              icons={icons}
+              titles={quizzes.map((quiz) => quiz.title)}
+              icons={quizzes.map((quiz) => quiz.icon)}
               onClick={(topic: number) => {
                 setTopic(topic);
                 setPage("question");
@@ -37,7 +35,7 @@ function App() {
             <Question
               setQuestionNumber={setQuestionNumber}
               quizzes={quizzes}
-              topic={topic}
+              topic={topicIndex}
               questionNumber={questionNumber}
               setPage={setPage}
             />

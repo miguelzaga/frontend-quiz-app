@@ -12,10 +12,13 @@ export default function Menu({ titles, icons, onClick }) {
           Pick a subject to get started.
         </p>
       </div>
+
       <Options
         titles={titles}
         icons={icons}
         children={null}
+        btnStates={titles}
+        selectBtn={null}
         onClick={(i) => onClick(i)}
       />
     </>

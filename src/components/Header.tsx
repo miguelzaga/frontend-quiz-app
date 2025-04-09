@@ -1,10 +1,26 @@
 import moonDark from "../assets/images/icon-moon-dark.svg";
 import sunDark from "../assets/images/icon-sun-dark.svg";
+import Icon from "./Icon";
 
-export default function Header({ title }) {
+export default function Header({
+  title,
+  icon,
+  page
+}: {
+  title: string;
+  icon: string;
+  page: string;
+}) {
   return (
     <header className="py-4 md:pt-10 md:pb-0 lg:pt-20">
-      <div>{title}</div>
+      {page === "menu" ? (
+        ""
+      ) : (
+        <div>
+          <p>{title}</p>
+          <Icon icon={icon} alt={`Icon of ${title}`} />
+        </div>
+      )}
       <div className="ml-auto flex w-fit items-center gap-x-2">
         <img className="size-4 md:size-6" src={sunDark} alt="" />
         <input

@@ -1,4 +1,5 @@
 import Options from "./Options";
+import { useState } from "react";
 
 export default function Question({
   setQuestionNumber,
@@ -19,6 +20,17 @@ export default function Question({
     questionOptions = question.options;
   }
 
+  type ButtonState = "unselected" | "selected" | "correct" | "wrong";
+  const [btnStates, setBtnStates] = useState<ButtonState[]>(
+    questionOptions.map(() => "unselected")
+  );
+
+  const resetBtns = () => setBtnStates(questionOptions.map(() => "unselected"));
+  const selectBtn = (i) =>
+    setBtnStates(
+      questionOptions.map((_, j) => (i === j ? "selected" : "unselected"))
+    );
+
   return (
     <>
       <div className="flex flex-col justify-between gap-6 md:gap-10 xl:max-w-[465px]">
@@ -36,9 +48,15 @@ export default function Question({
           ></div>
         </div>
       </div>
-      <Options titles={questionOptions} icons={null}>
+      <Options
+        titles={questionOptions}
+        icons={null}
+        btnStates={btnStates}
+        selectBtn={selectBtn}
+      >
         <button
           onClick={() => {
+            resetBtns();
             if (questionNumber < questions.length - 1) {
               setQuestionNumber(questionNumber + 1);
             } else {
