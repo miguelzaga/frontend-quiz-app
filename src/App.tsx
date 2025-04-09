@@ -25,8 +25,8 @@ function App() {
             <Menu
               titles={quizzes.map((quiz) => quiz.title)}
               icons={quizzes.map((quiz) => quiz.icon)}
-              onClick={(topic: number) => {
-                setTopic(topic);
+              handleClickOption={(topicIndex: number) => {
+                setTopic(topicIndex);
                 setPage("question");
               }}
             />

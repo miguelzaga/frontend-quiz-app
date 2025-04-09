@@ -1,6 +1,6 @@
 import Options from "./Options";
 
-export default function Menu({ titles, icons, onClick }) {
+export default function Menu({ titles, icons, handleClickOption }) {
   return (
     <>
       <div>
@@ -18,8 +18,7 @@ export default function Menu({ titles, icons, onClick }) {
         icons={icons}
         children={null}
         btnStates={titles}
-        selectBtn={null}
-        onClick={(i) => onClick(i)}
+        handleClickOption={handleClickOption}
       />
     </>
   );

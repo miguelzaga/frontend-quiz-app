@@ -12,13 +12,15 @@ export default function Header({
   page: string;
 }) {
   return (
-    <header className="py-4 md:pt-10 md:pb-0 lg:pt-20">
+    <header className="flex py-4 md:pt-10 md:pb-0 lg:pt-20">
       {page === "menu" ? (
         ""
       ) : (
-        <div>
-          <p>{title}</p>
-          <Icon icon={icon} alt={`Icon of ${title}`} />
+        <div className="flex items-center gap-4">
+          <div className="flex size-10 items-center justify-center rounded-md p-1.5 md:size-14 md:rounded-lg">
+            <Icon icon={icon} customBg={title} alt={`Icon of ${title}`} />
+          </div>
+          <p className="text-lg font-medium text-blue-900">{title}</p>
         </div>
       )}
       <div className="ml-auto flex w-fit items-center gap-x-2">

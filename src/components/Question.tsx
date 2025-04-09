@@ -25,12 +25,14 @@ export default function Question({
     questionOptions.map(() => "unselected")
   );
 
-  const resetBtns = () => setBtnStates(questionOptions.map(() => "unselected"));
-  const selectBtn = (i) =>
+  function resetBtns() {
+    setBtnStates(questionOptions.map(() => "unselected"));
+  }
+  function selectBtn(i: number) {
     setBtnStates(
       questionOptions.map((_, j) => (i === j ? "selected" : "unselected"))
     );
-
+  }
   return (
     <>
       <div className="flex flex-col justify-between gap-6 md:gap-10 xl:max-w-[465px]">
@@ -42,7 +44,7 @@ export default function Question({
             {questionTitle}
           </p>
         </div>
-        <div className="rounded-full bg-white p-1 lg:mb-28">
+        <div className="rounded-full bg-white p-1 min-[1064px]:mb-28">
           <div
             className={`${getBarWidth(questionNumber)} h-2 rounded-full bg-purple-500`}
           ></div>
@@ -52,7 +54,7 @@ export default function Question({
         titles={questionOptions}
         icons={null}
         btnStates={btnStates}
-        selectBtn={selectBtn}
+        handleClickOption={(i) => selectBtn(i)}
       >
         <button
           onClick={() => {
