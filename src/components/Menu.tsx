@@ -1,6 +1,14 @@
 import Options from "./Options";
 
-export default function Menu({ titles, icons, handleClickOption }) {
+export default function Menu({
+  titles,
+  icons,
+  handleClickOption
+}: {
+  titles: string[];
+  icons: string[] | null;
+  handleClickOption: (index: number) => void;
+}) {
   return (
     <>
       <div>
@@ -16,9 +24,8 @@ export default function Menu({ titles, icons, handleClickOption }) {
       <Options
         titles={titles}
         icons={icons}
-        children={null}
-        btnStates={titles}
         handleClickOption={handleClickOption}
+        btnStates={titles.map(() => "unselected")}
       />
     </>
   );

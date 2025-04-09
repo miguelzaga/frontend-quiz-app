@@ -9,25 +9,25 @@ export default function Options({
 }: {
   titles: string[];
   icons: string[] | null;
-  children: React.ReactNode;
-  onClick: Function;
+  children?: React.ReactNode;
+  btnStates: ButtonState[];
+  handleClickOption: (index: number) => void;
 }) {
   const alphabet = "ABCD";
 
   return (
     <ul className="grid gap-y-3 font-medium md:gap-y-6">
       {titles.map((title: string, index: number) => {
-        let stateClass = getCustomClass(btnStates[index]);
         return (
           <li key={title}>
             <button
               onClick={() => handleClickOption(index)}
-              className={`drop-shadow-list group flex h-16 w-full cursor-pointer items-center gap-x-4 rounded-xl border-[3px] bg-white p-3 md:h-20 md:gap-x-8 md:rounded-3xl lg:h-[92px] ${getButtonClass(btnStates[index])}`}
+              className={`drop-shadow-list group flex h-16 w-full cursor-pointer items-center gap-x-4 rounded-xl border-[3px] bg-white p-3 md:h-20 md:gap-x-8 md:rounded-3xl lg:h-[92px] ${getBtnStyle(btnStates[index])}`}
             >
               <Icon
                 icon={icons ? icons[index] : alphabet[index]}
                 customBg={title}
-                classes={stateClass}
+                classes={getIconBg(btnStates[index])}
                 alt={`Icon of ${titles[index]}`}
               ></Icon>
               <p className="md:text-heading-sm text-lg/none">{title}</p>
@@ -42,7 +42,7 @@ export default function Options({
 
 type ButtonState = "unselected" | "selected" | "correct" | "wrong";
 
-function getButtonClass(state: ButtonState) {
+function getBtnStyle(state: ButtonState) {
   switch (state) {
     case "selected":
       return "border-purple-500";
@@ -55,7 +55,7 @@ function getButtonClass(state: ButtonState) {
   }
 }
 
-function getCustomClass(state: ButtonState) {
+function getIconBg(state: ButtonState) {
   switch (state) {
     case "selected":
       return "bg-purple-500 text-white";

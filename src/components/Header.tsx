@@ -17,9 +17,12 @@ export default function Header({
         ""
       ) : (
         <div className="flex items-center gap-4">
-          <div className="flex size-10 items-center justify-center rounded-md p-1.5 md:size-14 md:rounded-lg">
-            <Icon icon={icon} customBg={title} alt={`Icon of ${title}`} />
-          </div>
+          <Icon
+            icon={icon}
+            customBg={title}
+            alt={`Icon of ${title}`}
+            classes={""}
+          />
           <p className="text-lg font-medium text-blue-900">{title}</p>
         </div>
       )}
