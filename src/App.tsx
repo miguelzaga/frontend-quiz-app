@@ -2,6 +2,7 @@ import Header from "./components/Header.tsx";
 import Layout from "./components/Layout.tsx";
 import Menu from "./components/Menu.tsx";
 import Question from "./components/Question.tsx";
+import Score from "./components/Score.tsx";
 
 import { useState } from "react";
 
@@ -12,6 +13,7 @@ function App() {
   const [page, setPage] = useState<string>("menu");
   const [topicIndex, setTopic] = useState<number>(NaN);
   const [questionNumber, setQuestionNumber] = useState<number>(0);
+  const [correctQuestions, setCorrectQuestions] = useState<number>(8);
 
   let title = isNaN(topicIndex) ? "" : quizzes[topicIndex].title;
   let icon = isNaN(topicIndex) ? "" : quizzes[topicIndex].icon;
@@ -40,7 +42,19 @@ function App() {
               setPage={setPage}
             />
           )}
-          {page === "score" && <p>Score Page</p>}
+          {page === "score" && (
+            <Score
+              title={title}
+              icon={icon}
+              correctQuestions={correctQuestions}
+              questionNumber={questionNumber}
+              resetGame={() => {
+                setPage("menu");
+                setTopic(NaN);
+                setQuestionNumber(0);
+              }}
+            />
+          )}
         </main>
       </Layout>
     </>
