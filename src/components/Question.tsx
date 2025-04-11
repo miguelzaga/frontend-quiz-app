@@ -1,6 +1,7 @@
 import Button from "./Button";
 import Options from "./Options";
 import { useState } from "react";
+import iconError from "../assets/images/icon-error.svg";
 
 interface Question {
   answer: string;
@@ -39,6 +40,7 @@ export default function Question({
     questionOptions.map(() => "unselected")
   );
   const [submitted, setSubmitted] = useState<boolean>(false);
+  const [submitError, setSubmitError] = useState<boolean>(false);
 
   function resetBtns() {
     setBtnStates(questionOptions.map(() => "unselected"));
@@ -63,7 +65,7 @@ export default function Question({
     setBtnStates(newStates);
   }
 
-  function handleSubmit() {
+  function handleSubmit(event) {
     if (submitted) {
       if (questionN < questions.length - 1) {
         incrementCurrQuestion();
@@ -72,14 +74,20 @@ export default function Question({
       }
       setSubmitted(false);
       resetBtns();
-    } else if (!btnStates.every((state) => state === "unselected")) {
-      setSubmitted(true);
-      validateAnswer();
+    } else {
+      if (btnStates.every((state) => state === "unselected")) {
+        setSubmitError(true);
+        event.target.scrollIntoView({ behavior: "smooth" });
+      } else {
+        setSubmitted(true);
+        validateAnswer();
+        setSubmitError(false);
+      }
     }
   }
   return (
     <>
-      <div className="flex flex-col justify-between gap-6 md:gap-10 xl:max-w-[465px]">
+      <div className="flex max-h-[452px] flex-col justify-between gap-6 md:gap-10 xl:max-w-[465px]">
         <div>
           <p className="md:text-body-sm text-sm/normal italic">
             Question {questionN + 1} of 10
@@ -88,7 +96,7 @@ export default function Question({
             {questionTitle}
           </p>
         </div>
-        <div className="rounded-full bg-white p-1 min-[1064px]:mb-28">
+        <div className="rounded-full bg-white p-1">
           <div
             className={`${getBarWidth(questionN)} h-2 rounded-full bg-purple-500`}
           ></div>
@@ -98,9 +106,23 @@ export default function Question({
         titles={questionOptions}
         icons={null}
         btnStates={btnStates}
-        handleClickOption={(i) => selectBtn(i)}
+        handleClickOption={(i) => (submitted ? "" : selectBtn(i))}
+        submitted={submitted}
+        answer={question.answer}
       >
-        <Button onClick={() => handleSubmit()}>Submit Answer</Button>
+        <Button onClick={(event) => handleSubmit(event)}>
+          {submitted ? "Next Question" : "Submit Answer"}
+        </Button>
+        {submitError ? (
+          <div className="flex items-center justify-center gap-2">
+            <img className="size-8 md:size-10" src={iconError} />
+            <span className="md:text-body-md text-center text-lg text-red-500">
+              Please select an answer
+            </span>
+          </div>
+        ) : (
+          ""
+        )}
       </Options>
     </>
   );

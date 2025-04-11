@@ -1,22 +1,26 @@
 import Icon from "./Icon.tsx";
+import iconError from "../assets/images/icon-error.svg";
+import iconCorrect from "../assets/images/icon-correct.svg";
 
 export default function Options({
   titles,
   icons,
   children,
   btnStates,
-  handleClickOption
+  handleClickOption,
+  submitted,
+  answer
 }: {
   titles: string[];
   icons: string[] | null;
   children?: React.ReactNode;
   btnStates: ButtonState[];
   handleClickOption: (index: number) => void;
+  submitted: boolean;
+  answer: string;
 }) {
-  const alphabet = "ABCD";
-
   return (
-    <ul className="grid gap-y-3 font-medium md:gap-y-6">
+    <ul className="relative grid gap-y-3 font-medium md:gap-y-6">
       {titles.map((title: string, index: number) => {
         return (
           <li key={title}>
@@ -25,12 +29,22 @@ export default function Options({
               className={`drop-shadow-list group flex h-16 w-full cursor-pointer items-center gap-x-4 rounded-xl border-[3px] bg-white p-3 md:h-20 md:gap-x-8 md:rounded-3xl lg:h-[92px] ${getBtnStyle(btnStates[index])}`}
             >
               <Icon
-                icon={icons ? icons[index] : alphabet[index]}
+                icon={icons ? icons[index] : "ABCDEFG"[index]}
                 customBg={title}
                 classes={getIconBg(btnStates[index])}
                 alt={`Icon of ${titles[index]}`}
               ></Icon>
               <p className="md:text-heading-sm text-lg/none">{title}</p>
+              {submitted && btnStates[index] === "wrong" ? (
+                <IconCorrect src={iconError} />
+              ) : (
+                ""
+              )}
+              {submitted && title === answer ? (
+                <IconCorrect src={iconCorrect} />
+              ) : (
+                ""
+              )}
             </button>
           </li>
         );
@@ -41,6 +55,10 @@ export default function Options({
 }
 
 type ButtonState = "unselected" | "selected" | "correct" | "wrong";
+
+function IconCorrect({ src }) {
+  return <img className="ml-auto size-8 md:size-10" src={src} />;
+}
 
 function getBtnStyle(state: ButtonState) {
   switch (state) {

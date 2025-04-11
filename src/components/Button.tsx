@@ -7,8 +7,8 @@ export default function Button({
 }) {
   return (
     <button
-      onClick={() => onClick()}
-      className="md:text-heading-sm w-full cursor-pointer rounded-xl bg-purple-500 p-3 text-lg leading-none font-medium text-white hover:opacity-50 md:mt-2 md:rounded-3xl md:p-8"
+      onClick={(event) => onClick(event)}
+      className="md:text-heading-sm w-full cursor-pointer rounded-xl bg-purple-500 p-[19px] text-lg leading-none font-medium text-white hover:opacity-50 md:my-2 md:rounded-3xl md:p-8"
     >
       {children}
     </button>
