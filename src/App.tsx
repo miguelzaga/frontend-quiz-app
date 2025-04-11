@@ -11,12 +11,12 @@ const quizzes = data.quizzes;
 
 function App() {
   const [page, setPage] = useState<string>("menu");
-  const [topicIndex, setTopic] = useState<number>(NaN);
-  const [questionNumber, setQuestionNumber] = useState<number>(0);
-  const [correctQuestions, setCorrectQuestions] = useState<number>(8);
+  const [quizIndex, setQuizIndex] = useState<number>(NaN);
+  const [currQuestion, setCurrQuestion] = useState<number>(0);
+  const [correctQuestions, setCorrectQuestions] = useState<number>(0);
 
-  let title = isNaN(topicIndex) ? "" : quizzes[topicIndex].title;
-  let icon = isNaN(topicIndex) ? "" : quizzes[topicIndex].icon;
+  let title = isNaN(quizIndex) ? "" : quizzes[quizIndex].title;
+  let icon = isNaN(quizIndex) ? "" : quizzes[quizIndex].icon;
   return (
     <>
       {/* TODO: style the dark mode */}
@@ -28,18 +28,18 @@ function App() {
               titles={quizzes.map((quiz) => quiz.title)}
               icons={quizzes.map((quiz) => quiz.icon)}
               handleClickOption={(topicIndex: number) => {
-                setTopic(topicIndex);
+                setQuizIndex(topicIndex);
                 setPage("question");
               }}
             />
           )}
           {page === "question" && (
             <Question
-              setQuestionNumber={setQuestionNumber}
-              quizzes={quizzes}
-              topic={topicIndex}
-              questionNumber={questionNumber}
-              setPage={setPage}
+              incrementCurrQuestion={() => setCurrQuestion(currQuestion + 1)}
+              quiz={quizzes[quizIndex]}
+              questionN={currQuestion}
+              goToScore={() => setPage("score")}
+              addOneCorrect={() => setCorrectQuestions(correctQuestions + 1)}
             />
           )}
           {page === "score" && (
@@ -47,11 +47,11 @@ function App() {
               title={title}
               icon={icon}
               correctQuestions={correctQuestions}
-              questionNumber={questionNumber}
+              questionN={currQuestion}
               resetGame={() => {
                 setPage("menu");
-                setTopic(NaN);
-                setQuestionNumber(0);
+                setQuizIndex(NaN);
+                setCurrQuestion(0);
               }}
             />
           )}

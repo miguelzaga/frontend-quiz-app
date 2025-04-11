@@ -5,13 +5,13 @@ export default function Score({
   title,
   icon,
   correctQuestions,
-  questionNumber,
+  questionN,
   resetGame
 }: {
   title: string;
   icon: string;
   correctQuestions: number;
-  questionNumber: number;
+  questionN: number;
   resetGame: Function;
 }) {
   return (
@@ -39,7 +39,7 @@ export default function Score({
             <b className="md:text-display my-4 block text-[5.5rem] leading-none font-medium text-blue-900 md:mt-10">
               {correctQuestions}
             </b>{" "}
-            out of {questionNumber + 1}
+            out of {questionN + 1}
           </p>
         </div>
         <div className="mt-3">

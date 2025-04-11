@@ -1,9 +1,19 @@
 import iconModules from "../iconModules.tsx";
 
-export default function Icon({ icon, alt, classes, customBg }) {
+export default function Icon({
+  icon,
+  alt,
+  classes,
+  customBg
+}: {
+  icon: string;
+  alt: string;
+  classes: string;
+  customBg: string;
+}) {
   return (
     <div
-      className={`${classes} ${getCustomColor(customBg)} flex size-10 items-center justify-center rounded-md p-1.5 md:size-14 md:rounded-lg`}
+      className={`${classes} ${getCustomColor(customBg)} flex size-10 shrink-0 items-center justify-center rounded-md p-1.5 md:size-14 md:rounded-lg`}
     >
       {iconModules[icon] ? (
         <img src={iconModules[icon].default} alt={alt} />
