@@ -4,7 +4,7 @@ import patternDesktop from "../assets/images/pattern-background-desktop-light.sv
 
 export default function Layout({ children }) {
   return (
-    <div className="relative min-h-screen overflow-y-clip bg-gray-100 font-thin md:pb-14 lg:pb-70">
+    <div className="relative min-h-screen overflow-y-clip bg-gray-100 font-thin md:pb-14">
       <picture className="absolute">
         <source srcSet={patternDesktop} media="(min-width: 1024px)" />
         <source srcSet={patternTablet} media="(min-width: 768px)" />

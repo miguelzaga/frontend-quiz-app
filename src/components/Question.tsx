@@ -74,6 +74,7 @@ export default function Question({
       }
       setSubmitted(false);
       resetBtns();
+      document.querySelector('main button').focus()
     } else {
       if (btnStates.every((state) => state === "unselected")) {
         setSubmitError(true);

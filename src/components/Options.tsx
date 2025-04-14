@@ -34,7 +34,7 @@ export default function Options({
                 classes={getIconBg(btnStates[index])}
                 alt={`Icon of ${titles[index]}`}
               ></Icon>
-              <p className="md:text-heading-sm text-lg/none">{title}</p>
+              <p className="md:text-heading-sm text-lg/none text-left">{title}</p>
               {submitted && btnStates[index] === "wrong" ? (
                 <IconCorrect src={iconError} />
               ) : (
