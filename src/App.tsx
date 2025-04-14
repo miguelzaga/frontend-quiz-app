@@ -10,6 +10,7 @@ import data from "./data.json";
 const quizzes = data.quizzes;
 
 function App() {
+  const [lightTheme, setLightTeme] = useState<boolean>(false);
   const [page, setPage] = useState<string>("menu");
   const [quizIndex, setQuizIndex] = useState<number>(NaN);
   const [currQuestion, setCurrQuestion] = useState<number>(0);
@@ -22,7 +23,7 @@ function App() {
       {/* TODO: style the dark mode */}
       <Layout>
         <Header title={title} icon={icon} page={page} />
-        <main className="mt-8 grid gap-y-10 text-blue-900 min-[1064px]:grid-cols-2 md:gap-y-16 lg:mt-20 lg:gap-x-8">
+        <main className="mt-8 grid gap-y-10 text-blue-900 min-[1064px]:grid-cols-2 md:gap-y-16 lg:mt-20 lg:gap-x-8 dark:text-white">
           {page === "menu" && (
             <Menu
               titles={quizzes.map((quiz) => quiz.title)}

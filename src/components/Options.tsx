@@ -26,7 +26,7 @@ export default function Options({
           <li key={title}>
             <button
               onClick={() => handleClickOption(index)}
-              className={`drop-shadow-list group flex h-16 w-full cursor-pointer items-center gap-x-4 rounded-xl border-[3px] bg-white p-3 md:h-20 md:gap-x-8 md:rounded-3xl lg:h-[92px] ${getBtnStyle(btnStates[index])}`}
+              className={`drop-shadow-list group flex h-16 w-full cursor-pointer items-center gap-x-4 rounded-xl border-[3px] bg-white p-3 md:h-20 md:gap-x-8 md:rounded-3xl lg:h-[92px] dark:bg-blue-800 ${getBtnStyle(btnStates[index])}`}
             >
               <Icon
                 icon={icons ? icons[index] : "ABCDEFG"[index]}
@@ -34,7 +34,9 @@ export default function Options({
                 classes={getIconBg(btnStates[index])}
                 alt={`Icon of ${titles[index]}`}
               ></Icon>
-              <p className="md:text-heading-sm text-lg/none text-left">{title}</p>
+              <p className="md:text-heading-sm text-left text-lg/none">
+                {title}
+              </p>
               {submitted && btnStates[index] === "wrong" ? (
                 <IconCorrect src={iconError} />
               ) : (
@@ -81,7 +83,9 @@ function getIconBg(state: ButtonState) {
       return "bg-red-500 text-white";
     case "correct":
       return "bg-green-500 text-white";
+    case "unselected":
+      return "border-transparent group-hover:bg-purple-200 group-hover:text-purple-500 dark:text-gray-600";
     default:
-      return "border-transparent group-hover:bg-purple-200 group-hover:text-purple-500";
+      return "border-transparent";
   }
 }

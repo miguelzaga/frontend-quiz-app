@@ -18,7 +18,7 @@ export default function Icon({
       {iconModules[icon] ? (
         <img src={iconModules[icon].default} alt={alt} />
       ) : (
-        <p className="md:text-heading-sm">{icon}</p>
+        <p className="md:text-heading-sm text-lg">{icon}</p>
       )}
     </div>
   );

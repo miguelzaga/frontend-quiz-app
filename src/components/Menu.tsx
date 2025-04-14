@@ -16,7 +16,7 @@ export default function Menu({
           Welcome to the{" "}
           <span className="mt-2 block font-medium">Frontend Quiz!</span>
         </h1>
-        <p className="md:text-body-sm mt-4 text-sm/normal italic lg:mt-12">
+        <p className="md:text-body-sm mt-4 text-sm/normal italic lg:mt-12 dark:text-gray-300">
           Pick a subject to get started.
         </p>
       </div>
@@ -25,7 +25,7 @@ export default function Menu({
         titles={titles}
         icons={icons}
         handleClickOption={handleClickOption}
-        btnStates={titles.map(() => "unselected")}
+        btnStates={titles.map(() => "")}
       />
     </>
   );

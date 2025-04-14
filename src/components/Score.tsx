@@ -23,7 +23,7 @@ export default function Score({
         </h1>
       </div>
       <div>
-        <div className="rounded-xl bg-white p-8 text-center md:rounded-3xl md:p-12">
+        <div className="rounded-xl bg-white p-8 text-center md:rounded-3xl md:p-12 dark:bg-blue-800">
           <div className="flex items-center justify-center gap-4">
             <Icon
               icon={icon}
@@ -31,15 +31,17 @@ export default function Score({
               alt={`Icon of ${title}`}
               classes={""}
             />
-            <h2 className="md:text-heading-sm text-lg font-medium text-blue-900">
+            <h2 className="md:text-heading-sm text-lg font-medium text-blue-900 dark:text-white">
               {title}
             </h2>
           </div>
-          <p className="md:text-body-md text-lg font-normal text-gray-600">
-            <b className="md:text-display my-4 block text-[5.5rem] leading-none font-medium text-blue-900 md:mt-10">
+          <p>
+            <b className="md:text-display my-4 block text-[5.5rem] leading-none font-medium text-blue-900 md:mt-10 dark:text-white">
               {correctQuestions}
             </b>{" "}
-            out of {questionN + 1}
+            <span className="md:text-body-md text-lg font-normal text-gray-600 dark:text-gray-300">
+              out of {questionN + 1}
+            </span>
           </p>
         </div>
         <div className="mt-3">
