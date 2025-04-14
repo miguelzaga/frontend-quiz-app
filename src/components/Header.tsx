@@ -7,11 +7,15 @@ import Icon from "./Icon";
 export default function Header({
   title,
   icon,
-  page
+  page,
+  theme,
+  handleToggle
 }: {
   title: string;
   icon: string;
   page: string;
+  theme: string;
+  handleToggle: Function;
 }) {
   return (
     <header className="flex py-4 md:pt-10 md:pb-0 lg:pt-20">
@@ -31,18 +35,22 @@ export default function Header({
         </div>
       )}
       <div className="ml-auto flex min-h-10 w-fit items-center gap-x-2 md:min-h-14">
-        <picture>
-          <source srcSet={sun} media="(prefers-color-scheme: dark)" />
-          <img className="size-4 md:size-6" src={sunDark} alt="sun icon" />
-        </picture>
+        <img
+          className="size-4 md:size-6"
+          src={theme === "light" ? sun : sunDark}
+          alt="sun icon"
+        />
+        {/* TODO: show correct theme on the toggle */}
         <input
           className="relative h-5 w-8 cursor-pointer appearance-none rounded-full bg-purple-500 after:absolute after:top-1 after:left-1 after:size-3 after:rounded-full after:bg-white after:transition after:content-[''] checked:after:translate-x-3 md:h-7 md:w-12 md:after:size-5 md:checked:after:translate-x-5"
           type="checkbox"
+          onClick={() => handleToggle()}
         />
-        <picture>
-          <source srcSet={moon} media="(prefers-color-scheme: dark)" />
-          <img className="size-4 md:size-6" src={moonDark} alt="moon icon" />
-        </picture>
+        <img
+          className="size-4 md:size-6"
+          src={theme === "light" ? moon : moonDark}
+          alt="moon icon"
+        />
       </div>
     </header>
   );
