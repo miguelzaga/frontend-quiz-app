@@ -57,7 +57,7 @@ function App() {
 
   return (
     <>
-      <Layout>
+      <Layout theme={theme}>
         <Header
           title={title}
           icon={icon}

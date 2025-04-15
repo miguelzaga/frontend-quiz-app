@@ -124,10 +124,8 @@ Use this section to outline areas that you want to continue focusing on in futur
 
 - [React - Passing JSX as children](https://react.dev/learn/passing-props-to-a-component#passing-jsx-as-children) - I made the Option component more reusable, for the start menu and the questions. 
 
-- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
+- [Dark mode](https://tailwindcss.com/docs/dark-mode) & [Grok conversation](https://grok.com/share/bGVnYWN5_74a61df4-e072-48bb-b9c7-6c86ef3db8df) - It was super useful to get the dark mode functionality.
 
-**Note: Delete this note and replace the list above with resources that helped you during the challenge. These could come in handy for anyone viewing your solution or for yourself when you look back on this project in the future.**
 
 ## Author
 
