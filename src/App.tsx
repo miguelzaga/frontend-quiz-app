@@ -65,7 +65,10 @@ function App() {
           theme={theme}
           handleToggle={toggleTheme}
         />
-        <main className="mt-8 grid gap-y-10 text-blue-900 min-[1064px]:grid-cols-2 md:gap-y-16 lg:mt-20 lg:gap-x-8 dark:text-white">
+        <main
+          onKeyDown={(event) => keyNavigation(event)}
+          className="mt-8 grid gap-y-10 text-blue-900 min-[1064px]:grid-cols-2 md:gap-y-16 lg:mt-20 lg:gap-x-8 dark:text-white"
+        >
           {page === "menu" && (
             <Menu
               titles={quizzes.map((quiz) => quiz.title)}
@@ -102,6 +105,39 @@ function App() {
       </Layout>
     </>
   );
+}
+
+function keyNavigation(event: React.KeyboardEvent) {
+  const letters = "abcd";
+  const currentElement = document.activeElement as HTMLElement | null;
+  const focusableElements = Array.from(
+    document.querySelectorAll("main ul button")
+  );
+  const submitButton = document.querySelector('main ul button[type="submit"]');
+
+  let index = focusableElements.indexOf(currentElement);
+
+  if (letters.includes(event.key)) {
+    index = letters.indexOf(event.key.toLowerCase());
+  }
+
+  if (index !== -1) {
+    switch (event.key) {
+      case "ArrowUp":
+        index = Math.max(index - 1, 0);
+        break;
+      case "ArrowDown":
+        index = Math.min(index + 1, focusableElements.length - 1);
+        break;
+    }
+
+    focusableElements[index].focus();
+  }
+
+  if (submitButton && event.key === "Enter" && event.ctrlKey) {
+    submitButton.focus();
+    submitButton.click();
+  }
 }
 
 export default App;

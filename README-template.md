@@ -126,6 +126,7 @@ Use this section to outline areas that you want to continue focusing on in futur
 
 - [Dark mode](https://tailwindcss.com/docs/dark-mode) & [Grok conversation](https://grok.com/share/bGVnYWN5_74a61df4-e072-48bb-b9c7-6c86ef3db8df) - It was super useful to get the dark mode functionality.
 
+- [TypeScript Event Types and Event Handling in React: A Complete Guide for Beginners](https://dev.to/nishanthan-k/typescript-event-types-and-event-handling-in-react-a-complete-guide-for-beginners-3cn0)
 
 ## Author
 

@@ -65,7 +65,7 @@ export default function Question({
     setBtnStates(newStates);
   }
 
-  function handleSubmit(event) {
+  function handleSubmit(event: React.ChangeEvent<HTMLInputElement>) {
     if (submitted) {
       if (questionN < questions.length - 1) {
         incrementCurrQuestion();
@@ -74,7 +74,7 @@ export default function Question({
       }
       setSubmitted(false);
       resetBtns();
-      document.querySelector("main button").focus();
+      event.target.focus;
     } else {
       if (btnStates.every((state) => state === "unselected")) {
         setSubmitError(true);
@@ -111,7 +111,11 @@ export default function Question({
         submitted={submitted}
         answer={question.answer}
       >
-        <Button onClick={(event) => handleSubmit(event)}>
+        <Button
+          onClick={(event: React.ChangeEvent<HTMLInputElement>) =>
+            handleSubmit(event)
+          }
+        >
           {submitted ? "Next Question" : "Submit Answer"}
         </Button>
         {submitError ? (

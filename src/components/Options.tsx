@@ -22,6 +22,7 @@ export default function Options({
   return (
     <ul className="relative grid gap-y-3 font-medium md:gap-y-6">
       {titles.map((title: string, index: number) => {
+        const letters = "ABCD";
         return (
           <li key={title}>
             <button
@@ -29,7 +30,7 @@ export default function Options({
               className={`drop-shadow-list group flex h-16 w-full cursor-pointer items-center gap-x-4 rounded-xl border-[3px] bg-white p-3 md:h-20 md:gap-x-8 md:rounded-3xl lg:h-[92px] dark:bg-blue-800 ${getBtnStyle(btnStates[index])}`}
             >
               <Icon
-                icon={icons ? icons[index] : "ABCDEFG"[index]}
+                icon={icons ? icons[index] : letters[index]}
                 customBg={title}
                 classes={getIconBg(btnStates[index])}
                 alt={`Icon of ${titles[index]}`}
@@ -38,12 +39,12 @@ export default function Options({
                 {title}
               </p>
               {submitted && btnStates[index] === "wrong" ? (
-                <IconCorrect src={iconError} />
+                <img className="ml-auto size-8 md:size-10" src={iconError} />
               ) : (
                 ""
               )}
               {submitted && title === answer ? (
-                <IconCorrect src={iconCorrect} />
+                <img className="ml-auto size-8 md:size-10" src={iconCorrect} />
               ) : (
                 ""
               )}
@@ -57,10 +58,6 @@ export default function Options({
 }
 
 type ButtonState = "unselected" | "selected" | "correct" | "wrong";
-
-function IconCorrect({ src }) {
-  return <img className="ml-auto size-8 md:size-10" src={src} />;
-}
 
 function getBtnStyle(state: ButtonState) {
   switch (state) {
